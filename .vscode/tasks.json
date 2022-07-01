@@ -1,0 +1,29 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Git Fetch & Pull",
+			"type": "shell",
+			"command": "git fetch & git pull",
+			"runOptions": { "runOn": "folderOpen" }
+		},
+		{
+			"label": "Generate Sample protoco",
+			"type": "shell",
+			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./db_service.proto",
+		},
+		{
+			"label": "Start SampleService Dev",
+			"type": "shell",
+			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python sample_service.py",
+		},
+		{
+			"label": "Test SampleService Dev",
+			"type": "shell",
+			"group": "test",
+			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python sample_service_test.py",
+		},
+	]
+}

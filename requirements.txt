@@ -1,0 +1,7 @@
+Faker==13.14.0
+grpcio==1.47.0
+grpcio-testing==1.47.0
+grpcio-tools==1.47.0
+protobuf==3.20.1
+python-dateutil==2.8.2
+six==1.16.0
