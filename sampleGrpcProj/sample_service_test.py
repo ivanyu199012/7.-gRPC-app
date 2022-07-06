@@ -1,3 +1,4 @@
+import time
 import grpc
 import grpc_testing
 import unittest
@@ -24,8 +25,8 @@ class SampleServiceTest(unittest.TestCase):
 		logger.info( f"---------------------------------------------" )
 		logger.info( f"\n" )
 
+	@unittest.skip
 	def test_doSimple(self):
-		""" expect to get Cases response """
 		faker = Faker()
 		request = sample_service_pb2.Request( input=faker.name() )
 
@@ -40,8 +41,8 @@ class SampleServiceTest(unittest.TestCase):
 		self.assertEqual( code, grpc.StatusCode.OK )
 		self.assertEqual( response.output, f"Hello { request.input }!" )
 
+	@unittest.skip
 	def test_doResponseStreaming(self):
-		""" expect to get Cases response """
 		faker = Faker()
 		request = sample_service_pb2.Request( input=faker.name() )
 
@@ -55,9 +56,28 @@ class SampleServiceTest(unittest.TestCase):
 		response_generator, _, code, _ = doResponseStreaming_method.termination()
 		self.assertEqual( code, grpc.StatusCode.OK )
 
-		logger.info( f"{ response_generator= }")
 		for res in response_generator:
 			logger.info( f"{res.output=}" )
+
+	def test_doRequestStreaming(self):
+
+		def get_fake_name_generator():
+			faker = Faker()
+			for _ in range( 10 ):
+				time.sleep( 0.5 )
+				yield sample_service_pb2.Request( input=faker.name() )
+
+		request = get_fake_name_generator()
+		doRequestStreaming_method = self.test_server.invoke_unary_unary(
+			method_descriptor=(sample_service_pb2.DESCRIPTOR
+				.services_by_name['SampleService']
+				.methods_by_name['doRequestStreaming']),
+			invocation_metadata={},
+			request=request, timeout=10)
+
+		response, _, code, _ = doRequestStreaming_method.termination()
+		self.assertEqual( code, grpc.StatusCode.OK )
+		logger.info( f"{ response.output= }" )
 
 if __name__ == '__main__':
 	unittest.main()

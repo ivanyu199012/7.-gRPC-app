@@ -25,14 +25,16 @@ class SampleService( SampleServiceServicer ):
 		logger.info( f"{ name_list= }" )
 
 		for name in name_list:
-			time.sleep( 1 )
+			time.sleep( 0.5 )
 			yield Response( output=name )
 
 	def doRequestStreaming(self, request_iterator, context):
-		"""Missing associated documentation comment in .proto file."""
-		context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-		context.set_details('Method not implemented!')
-		raise NotImplementedError('Method not implemented!')
+		result_list = []
+		for request in request_iterator:
+			result_list.append( request.input.upper() )
+
+		return Response( output=",".join( result_list ) )
+
 
 	def doBidirectional(self, request_iterator, context):
 		"""Missing associated documentation comment in .proto file."""
