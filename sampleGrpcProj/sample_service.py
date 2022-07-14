@@ -7,7 +7,7 @@ import grpc
 import pytz
 from logger import logger
 
-from sample_service_pb2 import Response, SpecialDataTypeResponse
+from sample_service_pb2 import Response, SpecialDataTypeResponse, CardInfo
 from sample_service_pb2_grpc import SampleServiceServicer, add_SampleServiceServicer_to_server
 
 class SampleService( SampleServiceServicer ):
@@ -46,10 +46,11 @@ class SampleService( SampleServiceServicer ):
 
 		KST = timezone( timedelta( hours=9 ) )
 		dateWithTime = datetime.fromtimestamp(request.date.seconds + request.date.nanos/1e9).replace( tzinfo=KST ) + timedelta(hours=1)
-		additionalName = "Boris Lee"
-		names = [ *request.names, additionalName ]
-		name2phoneNumMap = { **request.name2phoneNumMap, additionalName : "02-1577-8688" }
-		numberOfCreditCard = 0
+		added_name = "Boris Lee"
+		names = [ *request.names, added_name ]
+		name2phoneNumMap = { **request.name2phoneNumMap, added_name : "02-1577-8688" }
+		cardInfos = request.cardInfos
+		cardInfos.append( CardInfo( name="Boris Lee", numberOfCreditCard=0 ) )
 
 		timestamp = Timestamp()
 		timestamp.FromDatetime( dateWithTime )
@@ -57,7 +58,7 @@ class SampleService( SampleServiceServicer ):
 			date=timestamp,
 			names=names,
 			name2phoneNumMap=name2phoneNumMap,
-			numberOfCreditCard=numberOfCreditCard,
+			cardInfos=cardInfos,
 		)
 
 	@classmethod

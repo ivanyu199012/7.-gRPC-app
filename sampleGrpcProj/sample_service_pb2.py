@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14sample_service.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x18\n\x07Request\x12\r\n\x05input\x18\x01 \x01(\t\"\x1a\n\x08Response\x12\x0e\n\x06output\x18\x01 \x01(\t\"\xef\x01\n\x16SpecialDataTypeRequest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05names\x18\x02 \x03(\t\x12G\n\x10name2phoneNumMap\x18\x03 \x03(\x0b\x32-.SpecialDataTypeRequest.Name2phoneNumMapEntry\x12\x1a\n\x12numberOfCreditCard\x18\x04 \x01(\x05\x1a\x37\n\x15Name2phoneNumMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xf1\x01\n\x17SpecialDataTypeResponse\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05names\x18\x02 \x03(\t\x12H\n\x10name2phoneNumMap\x18\x03 \x03(\x0b\x32..SpecialDataTypeResponse.Name2phoneNumMapEntry\x12\x1a\n\x12numberOfCreditCard\x18\x04 \x01(\x05\x1a\x37\n\x15Name2phoneNumMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32\x89\x02\n\rSampleService\x12!\n\x08\x64oSimple\x12\x08.Request\x1a\t.Response\"\x00\x12.\n\x13\x64oResponseStreaming\x12\x08.Request\x1a\t.Response\"\x00\x30\x01\x12-\n\x12\x64oRequestStreaming\x12\x08.Request\x1a\t.Response\"\x00(\x01\x12,\n\x0f\x64oBidirectional\x12\x08.Request\x1a\t.Response\"\x00(\x01\x30\x01\x12H\n\x11\x64oSpecialDataType\x12\x17.SpecialDataTypeRequest\x1a\x18.SpecialDataTypeResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14sample_service.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x18\n\x07Request\x12\r\n\x05input\x18\x01 \x01(\t\"\x1a\n\x08Response\x12\x0e\n\x06output\x18\x01 \x01(\t\"\xf1\x01\n\x16SpecialDataTypeRequest\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05names\x18\x02 \x03(\t\x12G\n\x10name2phoneNumMap\x18\x03 \x03(\x0b\x32-.SpecialDataTypeRequest.Name2phoneNumMapEntry\x12\x1c\n\tcardInfos\x18\x04 \x03(\x0b\x32\t.CardInfo\x1a\x37\n\x15Name2phoneNumMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xf3\x01\n\x17SpecialDataTypeResponse\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05names\x18\x02 \x03(\t\x12H\n\x10name2phoneNumMap\x18\x03 \x03(\x0b\x32..SpecialDataTypeResponse.Name2phoneNumMapEntry\x12\x1c\n\tcardInfos\x18\x04 \x03(\x0b\x32\t.CardInfo\x1a\x37\n\x15Name2phoneNumMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"P\n\x08\x43\x61rdInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1f\n\x12numberOfCreditCard\x18\x02 \x01(\x05H\x00\x88\x01\x01\x42\x15\n\x13_numberOfCreditCard2\x89\x02\n\rSampleService\x12!\n\x08\x64oSimple\x12\x08.Request\x1a\t.Response\"\x00\x12.\n\x13\x64oResponseStreaming\x12\x08.Request\x1a\t.Response\"\x00\x30\x01\x12-\n\x12\x64oRequestStreaming\x12\x08.Request\x1a\t.Response\"\x00(\x01\x12,\n\x0f\x64oBidirectional\x12\x08.Request\x1a\t.Response\"\x00(\x01\x30\x01\x12H\n\x11\x64oSpecialDataType\x12\x17.SpecialDataTypeRequest\x1a\x18.SpecialDataTypeResponse\"\x00\x62\x06proto3')
 
 
 
@@ -25,6 +25,7 @@ _SPECIALDATATYPEREQUEST = DESCRIPTOR.message_types_by_name['SpecialDataTypeReque
 _SPECIALDATATYPEREQUEST_NAME2PHONENUMMAPENTRY = _SPECIALDATATYPEREQUEST.nested_types_by_name['Name2phoneNumMapEntry']
 _SPECIALDATATYPERESPONSE = DESCRIPTOR.message_types_by_name['SpecialDataTypeResponse']
 _SPECIALDATATYPERESPONSE_NAME2PHONENUMMAPENTRY = _SPECIALDATATYPERESPONSE.nested_types_by_name['Name2phoneNumMapEntry']
+_CARDINFO = DESCRIPTOR.message_types_by_name['CardInfo']
 Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), {
   'DESCRIPTOR' : _REQUEST,
   '__module__' : 'sample_service_pb2'
@@ -69,6 +70,13 @@ SpecialDataTypeResponse = _reflection.GeneratedProtocolMessageType('SpecialDataT
 _sym_db.RegisterMessage(SpecialDataTypeResponse)
 _sym_db.RegisterMessage(SpecialDataTypeResponse.Name2phoneNumMapEntry)
 
+CardInfo = _reflection.GeneratedProtocolMessageType('CardInfo', (_message.Message,), {
+  'DESCRIPTOR' : _CARDINFO,
+  '__module__' : 'sample_service_pb2'
+  # @@protoc_insertion_point(class_scope:CardInfo)
+  })
+_sym_db.RegisterMessage(CardInfo)
+
 _SAMPLESERVICE = DESCRIPTOR.services_by_name['SampleService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -82,13 +90,15 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _RESPONSE._serialized_start=83
   _RESPONSE._serialized_end=109
   _SPECIALDATATYPEREQUEST._serialized_start=112
-  _SPECIALDATATYPEREQUEST._serialized_end=351
-  _SPECIALDATATYPEREQUEST_NAME2PHONENUMMAPENTRY._serialized_start=296
-  _SPECIALDATATYPEREQUEST_NAME2PHONENUMMAPENTRY._serialized_end=351
-  _SPECIALDATATYPERESPONSE._serialized_start=354
-  _SPECIALDATATYPERESPONSE._serialized_end=595
-  _SPECIALDATATYPERESPONSE_NAME2PHONENUMMAPENTRY._serialized_start=296
-  _SPECIALDATATYPERESPONSE_NAME2PHONENUMMAPENTRY._serialized_end=351
-  _SAMPLESERVICE._serialized_start=598
-  _SAMPLESERVICE._serialized_end=863
+  _SPECIALDATATYPEREQUEST._serialized_end=353
+  _SPECIALDATATYPEREQUEST_NAME2PHONENUMMAPENTRY._serialized_start=298
+  _SPECIALDATATYPEREQUEST_NAME2PHONENUMMAPENTRY._serialized_end=353
+  _SPECIALDATATYPERESPONSE._serialized_start=356
+  _SPECIALDATATYPERESPONSE._serialized_end=599
+  _SPECIALDATATYPERESPONSE_NAME2PHONENUMMAPENTRY._serialized_start=298
+  _SPECIALDATATYPERESPONSE_NAME2PHONENUMMAPENTRY._serialized_end=353
+  _CARDINFO._serialized_start=601
+  _CARDINFO._serialized_end=681
+  _SAMPLESERVICE._serialized_start=684
+  _SAMPLESERVICE._serialized_end=949
 # @@protoc_insertion_point(module_scope)

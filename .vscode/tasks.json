@@ -12,7 +12,7 @@
 		{
 			"label": "Generate Sample protoco",
 			"type": "shell",
-			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./db_service.proto",
+			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./sample_service.proto",
 		},
 		{
 			"label": "Start SampleService Dev",

@@ -115,17 +115,17 @@ class SampleServiceTest(unittest.TestCase):
 		timestamp.FromDatetime( current_datetime )
 		names = [ faker.name() for i in range( 10 )]
 		name2phoneNumMap = { name: faker.phone_number() for name in names }
-		numberOfCreditCard = 3
+		cardInfos = [ sample_service_pb2.CardInfo( name=faker.name(), numberOfCreditCard=1 ) for i in range( 10 ) ]
 
 		logger.info( f"request.date={ datetime.strftime( current_datetime, '%Y-%m-%d %H:%M:%S%Z' ) }" )
 		logger.info( f"request.names={ names }" )
 		logger.info( f"request.name2phoneNumMap={ name2phoneNumMap }" )
-		logger.info( f"request.numberOfCreditCard={ numberOfCreditCard }" )
+		logger.info( f"request.cardInfos={ cardInfos }" )
 		request = sample_service_pb2.SpecialDataTypeRequest(
 			date=timestamp,
 			names=names,
 			name2phoneNumMap=name2phoneNumMap,
-			numberOfCreditCard=numberOfCreditCard,
+			cardInfos=cardInfos,
 		)
 
 		doSpecialDataType_method = self.test_server.invoke_unary_unary(
@@ -142,7 +142,7 @@ class SampleServiceTest(unittest.TestCase):
 		logger.info( f"result_date={ datetime.strftime( result_date.replace( tzinfo=KST ), '%Y-%m-%d %H:%M:%S%Z' ) }" )
 		logger.info( f"{ response.names= }")
 		logger.info( f"{ response.name2phoneNumMap= }")
-		logger.info( f"{ response.numberOfCreditCard= }")
+		logger.info( f"{ response.cardInfos= }")
 
 
 if __name__ == '__main__':

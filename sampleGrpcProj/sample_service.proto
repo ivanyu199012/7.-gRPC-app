@@ -34,12 +34,17 @@ message SpecialDataTypeRequest{
 	google.protobuf.Timestamp date = 1;
 	repeated string names = 2;
 	map<string, string> name2phoneNumMap = 3;
-	int32 numberOfCreditCard = 4;
+	repeated CardInfo cardInfos = 4;
 }
 
 message SpecialDataTypeResponse{
 	google.protobuf.Timestamp date = 1;
 	repeated string names = 2;
 	map<string, string> name2phoneNumMap = 3;
-	int32 numberOfCreditCard = 4;
+	repeated CardInfo cardInfos = 4;
+}
+
+message CardInfo {
+	string name = 1;
+	optional int32 numberOfCreditCard = 2;
 }
