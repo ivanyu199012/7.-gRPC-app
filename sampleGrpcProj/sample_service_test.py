@@ -1,9 +1,8 @@
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 import time
 import grpc
 import grpc_testing
 import unittest
-import pytz
 import sample_service_pb2
 from sample_service import SampleService
 from google.protobuf.timestamp_pb2 import Timestamp
@@ -26,7 +25,6 @@ class SampleServiceTest(unittest.TestCase):
 		logger.info( f"---------------------------------------------" )
 		logger.info( f"\n" )
 
-	@unittest.skip
 	def test_doSimple(self):
 		faker = Faker()
 		request = sample_service_pb2.Request( input=faker.name() )
@@ -42,7 +40,6 @@ class SampleServiceTest(unittest.TestCase):
 		self.assertEqual( code, grpc.StatusCode.OK )
 		self.assertEqual( response.output, f"Hello { request.input }!" )
 
-	@unittest.skip
 	def test_doResponseStreaming(self):
 		faker = Faker()
 		request = sample_service_pb2.Request( input=faker.name() )
@@ -60,7 +57,6 @@ class SampleServiceTest(unittest.TestCase):
 		for res in response_generator:
 			logger.info( f"{res.output=}" )
 
-	@unittest.skip
 	def test_doRequestStreaming(self):
 
 		def get_fake_name_generator():

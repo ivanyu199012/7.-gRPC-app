@@ -25,5 +25,11 @@
 			"group": "test",
 			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python sample_service_test.py",
 		},
+		{
+			"label": "Start SampleService Client",
+			"type": "shell",
+			"group": "test",
+			"command": "sampleGrpcProjEnv\\Scripts\\activate && cd SampleGrpcProj && python sample_service_client.py",
+		}
 	]
 }

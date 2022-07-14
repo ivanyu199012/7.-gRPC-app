@@ -68,6 +68,7 @@ class SampleService( SampleServiceServicer ):
 		add_SampleServiceServicer_to_server( SampleService(), server)
 		server.add_insecure_port(f'[::]:{ port }')
 		server.start()
+		logger.info( f"SampleService started at port { port }" )
 		server.wait_for_termination()
 
 
