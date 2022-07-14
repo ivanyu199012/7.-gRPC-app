@@ -1,12 +1,13 @@
 from concurrent import futures
+from datetime import datetime, timedelta, timezone
 import time
 from faker import Faker
 from google.protobuf.timestamp_pb2 import Timestamp
-
 import grpc
+import pytz
 from logger import logger
 
-from sample_service_pb2 import Response
+from sample_service_pb2 import Response, SpecialDataTypeResponse
 from sample_service_pb2_grpc import SampleServiceServicer, add_SampleServiceServicer_to_server
 
 class SampleService( SampleServiceServicer ):
@@ -32,21 +33,32 @@ class SampleService( SampleServiceServicer ):
 		result_list = []
 		for request in request_iterator:
 			result_list.append( request.input.upper() )
+			logger.info( f"{ request.input.upper() } is appended to the list" )
 
 		return Response( output=",".join( result_list ) )
 
 
 	def doBidirectional(self, request_iterator, context):
-		"""Missing associated documentation comment in .proto file."""
-		context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-		context.set_details('Method not implemented!')
-		raise NotImplementedError('Method not implemented!')
+		for request in request_iterator:
+			yield Response( output=request.input + " is excellent!" )
 
 	def doSpecialDataType(self, request, context):
-		"""Missing associated documentation comment in .proto file."""
-		context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-		context.set_details('Method not implemented!')
-		raise NotImplementedError('Method not implemented!')
+
+		KST = timezone( timedelta( hours=9 ) )
+		dateWithTime = datetime.fromtimestamp(request.date.seconds + request.date.nanos/1e9).replace( tzinfo=KST ) + timedelta(hours=1)
+		additionalName = "Boris Lee"
+		names = [ *request.names, additionalName ]
+		name2phoneNumMap = { **request.name2phoneNumMap, additionalName : "02-1577-8688" }
+		numberOfCreditCard = 0
+
+		timestamp = Timestamp()
+		timestamp.FromDatetime( dateWithTime )
+		return SpecialDataTypeResponse(
+			date=timestamp,
+			names=names,
+			name2phoneNumMap=name2phoneNumMap,
+			numberOfCreditCard=numberOfCreditCard,
+		)
 
 	@classmethod
 	def serve( self ):
