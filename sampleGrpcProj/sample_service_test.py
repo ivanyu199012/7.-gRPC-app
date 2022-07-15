@@ -79,7 +79,6 @@ class SampleServiceTest(unittest.TestCase):
 		self.assertEqual( code, grpc.StatusCode.OK )
 		logger.info( f"{ response.output= }" )
 
-	@unittest.skip
 	def test_doBidirectional(self):
 
 		def get_fake_name_generator():
