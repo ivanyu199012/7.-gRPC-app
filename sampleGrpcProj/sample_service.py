@@ -21,8 +21,7 @@ class SampleService( SampleServiceServicer ):
 	def doResponseStreaming(self, request, context):
 		logger.info( f"{ request.input= }" )
 		faker = Faker()
-		name_list = [ faker.name() for i in range( 10 ) ]
-		name_list.append( request.input )
+		name_list = [ *[ faker.name() for i in range( 3 ) ], request.input ]
 		logger.info( f"{ name_list= }" )
 
 		for name in name_list:
@@ -35,7 +34,7 @@ class SampleService( SampleServiceServicer ):
 			result_list.append( request.input.upper() )
 			logger.info( f"{ request.input.upper() } is appended to the list" )
 
-		return Response( output=",".join( result_list ) )
+		return Response( output=", ".join( result_list ) )
 
 
 	def doBidirectional(self, request_iterator, context):

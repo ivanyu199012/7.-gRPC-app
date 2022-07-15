@@ -17,8 +17,8 @@ class SampleClient:
 		with grpc.insecure_channel('localhost:50051') as channel:
 			stub = SampleServiceStub( channel )
 			request = Request( input=self.faker.name() )
-			response = stub.doSimple( request )
 			logger.info( f"doSimple client sent: { request.input }" )
+			response = stub.doSimple( request )
 			logger.info( f"doSimple client received: { response.output }" )
 
 	@classmethod
@@ -26,8 +26,8 @@ class SampleClient:
 		with grpc.insecure_channel('localhost:50051') as channel:
 			stub = SampleServiceStub( channel )
 			request = Request( input=self.faker.name() )
-			response_generator = stub.doResponseStreaming( request )
 			logger.info( f"doResponseStreaming client sent: { request.input }" )
+			response_generator = stub.doResponseStreaming( request )
 			for response in response_generator:
 				logger.info( f"doResponseStreaming client received: { response.output }" )
 
@@ -36,7 +36,7 @@ class SampleClient:
 
 		def get_fake_name_generator():
 			faker = Faker()
-			for _ in range( 10 ):
+			for _ in range( 3 ):
 				time.sleep( 0.5 )
 				name = faker.name()
 				logger.info( f"doRequestStreaming client sent: { name }." )
@@ -53,7 +53,7 @@ class SampleClient:
 
 		def get_fake_name_generator():
 			faker = Faker()
-			for _ in range( 10 ):
+			for _ in range( 3 ):
 				time.sleep( 0.5 )
 				name = faker.name()
 				logger.info( f"doRequestStreaming client sent: { name }." )
